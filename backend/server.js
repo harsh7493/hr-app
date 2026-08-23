@@ -32,7 +32,13 @@ app.use(express.json());
 const CONFIDENCE_THRESHOLD = 0.34;
 
 // Log which LLM mode is active at startup so it's obvious from the terminal
-console.log(`LLM mode: ${MODE.toUpperCase()} ${MODE === "openai" ? "(real API)" : "(mock/dummy)"}`);
+const modeLabel = {
+  mock:   "(mock/dummy — no API key needed)",
+  openai: "(real API — OpenAI gpt-4o-mini)",
+  gemini: "(real API — Google Gemini free)",
+  groq:   "(real API — Groq Llama 3 free)",
+};
+console.log(`LLM mode: ${MODE.toUpperCase()} ${modeLabel[MODE] || "(unknown mode)"}`);
 
 // -----------------------------------------------------------------------
 // Health check
